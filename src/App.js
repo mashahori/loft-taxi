@@ -8,8 +8,8 @@ import Profile from './components/Profile/Profile.js';
 const PAGES = {
   profile: () => <Profile />,
   map: () => <Map />,
-  signup: setpage => <Signup setpage={setpage}/>,
-  login: setpage => <Login setpage={setpage} />,
+  signup: setPage => <Signup setPage={setPage}/>,
+  login: setPage => <Login setPage={setPage} />,
 }
 
 class App extends React.PureComponent {
@@ -28,7 +28,7 @@ class App extends React.PureComponent {
 
     return (
       <>
-        <Header setPage={this.setPage} />
+        <Header setPage={this.setPage}/>
         {PAGES[page](this.setPage)}
       </>
     );
