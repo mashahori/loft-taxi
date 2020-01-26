@@ -1,0 +1,15 @@
+.login {
+  background-color: #323232;
+  background-image: url('../../assets/images/login_background.png');
+  min-height: 100vh;
+}
+
+.login__form {
+  padding: 44px 60px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+}

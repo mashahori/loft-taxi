@@ -1,17 +1,23 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Navigation extends PureComponent {
-  handleClick = () => {
-      this.props.setPage(this.props.text)
+const Navigation =(props) => {
+  
+  const handleClick = () => {
+      props.setPage(text)
     }
 
-  render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.props.text}
-      </button>
-      );
-    };
+  const { text } = props;
+
+  return (
+    <button onClick={handleClick}>
+      {text}
+    </button>
+    );
 };
+
+Navigation.propTypes = {
+  text: PropTypes.string,
+}
 
 export default Navigation;
