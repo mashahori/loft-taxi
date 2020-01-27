@@ -18,20 +18,11 @@ const useStyles = makeStyles({
 const Login = (props) => {
     const classes = useStyles();
     const context = useContext(Context);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        console.log(email, password);
-        props.setPage('map');
-        context.login(email, password);
-    }
     
     return (
         <div className={style.login}>
             <Container maxWidth="md" style={{ paddingTop: "285px", paddingLeft: "585px"}}>
-                <form className={style.login__form} onSubmit={() => context.login()}>
+                <form className={style.login__form} onSubmit={(e) => context.login(e.target.email.value, e.target.password.value)}>
                     <Typography variant="h2" style={{ fontSize: "36px", marginBottom: "30px"}}>Войти</Typography>
                     <Typography variant="subtitle2" className={classes.subtitle}>
                         Новый пользователь?

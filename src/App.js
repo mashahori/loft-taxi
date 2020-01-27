@@ -29,10 +29,12 @@ class App extends React.PureComponent {
     });
   }
 
-  login = () => {
+  login = (email, password) => {
     this.setState({
       page: 'map',
       isLoggedIn: true,
+      email: email,
+      password: password,
     });
   }
 
@@ -49,8 +51,8 @@ class App extends React.PureComponent {
     const { page, isLoggedIn, email, password } = this.state;
 
     return (
-      <Context.Provider value={this.login}>
-          {isLoggedIn && <Header setPage={this.setPage}/>}
+      <Context.Provider value={{ login: this.login, logout: this.logout }}>
+          {isLoggedIn && <Header setPage={this.setPage} />}
           {PAGES[page](this.setPage)}
       </Context.Provider>
     );
