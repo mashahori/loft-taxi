@@ -1,8 +1,32 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, TextField, Container, Typography, Link } from '@material-ui/core';
+import { Context } from '../../App';
+
+import style from './signup.module.css'
+
+const useStyles = makeStyles({
+    container: {
+        paddingTop: "285px",
+        paddingLeft: "585px",
+    },
+    textField: {
+        marginBottom: "30px",
+    },
+    title: { 
+        fontSize: "36px",
+        marginBottom: "30px",
+    },
+    subtitle: {
+        marginBottom: "30px",
+        display: "flex",
+    }
+});
 
 const Signup = (props) => {
+    const classes = useStyles();
+    const context = useContext(Context);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -11,22 +35,43 @@ const Signup = (props) => {
         const name = e.target.name.value;
         const surname = e.target.surname.value;
         console.log(password, name, email, surname );
-        props.setPage('map');
+        context.login(email, password);
     }
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <TextField type="email" name="email" required />
-            <input type="text" name="name" />
-            <input type="text" name="surname" />
-            <input type="password" name="password" />
-            <Button variant="contained" color="primary">
-                Sign up
-            </Button>
-        </form>
+        <div className={style.signup}>
+            <Container className={classes.container} maxWidth="md">
+                <div className={style.card}>
+                    <Typography variant="h2" className={classes.title}>Регистрация</Typography>
+                    <Typography variant="subtitle2" className={classes.subtitle}>
+                        Уже зарегестрированы?
+                        <Link>Войти</Link>
+                    </Typography>
+                    <form className={style.form} onSubmit={handleSubmit}>
+                        <TextField className={classes.textField} type="email" name="email" required label={<span>Адрес электронной почты</span>} />
+                        <TextField className={classes.textField} type="text" name="name" required label={<span>Имя</span>} />
+                        <TextField className={classes.textField} type="text" name="surname" required label={<span>Фамилия</span>} />
+                        <TextField className={classes.textField} type="password" name="password" required label={<span>Пароль</span>}  />
+                        <Button variant="contained" color="primary">
+                            Sign up
+                        </Button>
+                    </form>
+                </div>
+            </Container>
+        </div>
     );
 
-}
+};
+
+Signup.propTypes = {
+  setPage: PropTypes.func,
+};
+
+Signup.defaultProps = {
+  setPage: () => {},
+};
+    
+  
 
 export default Signup;

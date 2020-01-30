@@ -24,6 +24,7 @@ const Navigation =(props) => {
 
 Navigation.propTypes = {
   text: PropTypes.string,
+  setPage: PropTypes.func.isRequired,
 }
 
 export default Navigation;

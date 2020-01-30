@@ -6,7 +6,15 @@ import { Context } from '../../App';
 import style from './Login.module.css'
 
 const useStyles = makeStyles({
+    container: {
+        paddingTop: "285px",
+        paddingLeft: "585px",
+    },
     textField: {
+        marginBottom: "30px",
+    },
+    title: { 
+        fontSize: "36px",
         marginBottom: "30px",
     },
     subtitle: {
@@ -15,25 +23,32 @@ const useStyles = makeStyles({
     }
   });
 
-const Login = (props) => {
+const Login = () => {
     const classes = useStyles();
     const context = useContext(Context);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      context.login(e.target.email.value, e.target.password.value);
+    }
     
     return (
         <div className={style.login}>
-            <Container maxWidth="md" style={{ paddingTop: "285px", paddingLeft: "585px"}}>
-                <form className={style.login__form} onSubmit={(e) => context.login(e.target.email.value, e.target.password.value)}>
-                    <Typography variant="h2" style={{ fontSize: "36px", marginBottom: "30px"}}>Войти</Typography>
+            <Container maxWidth="md" className={classes.container}>
+                <div className={style.card}>
+                    <Typography variant="h2" className={classes.title}>Войти</Typography>
                     <Typography variant="subtitle2" className={classes.subtitle}>
                         Новый пользователь?
                         <Link>Зарегестрируйтесь</Link>
                     </Typography>
+                <form className={style.form} onSubmit={handleSubmit}>
                     <TextField className={classes.textField} type="email" name="email" required label={<span>Имя пользователя</span>} />
                     <TextField className={classes.textField} type="password" name="password" required label={<span>Пароль</span>}  />
                     <Button className={style.login__submit} variant="contained" color="primary" type="submit">
                         Log in
                     </Button>
                 </form>
+                </div>
             </Container>
         </div>
     );

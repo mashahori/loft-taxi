@@ -1,4 +1,4 @@
-.login {
+.signup {
   background-color: #323232;
   background-image: url('../../assets/images/login_background.png');
   min-height: 100vh;
@@ -11,6 +11,7 @@
   background-color: #FFFFFF;
   border-radius: 4px;
 }
+
 
 .form {
   display: flex;

@@ -15,6 +15,8 @@ const PAGES = {
   login: (setPage) =><Login setPage={setPage} />,
 }
 
+const routes=[ 'map', 'profile', 'logout', 'signup' ];
+
 class App extends React.PureComponent {
   state = {
     page: 'login',
@@ -48,11 +50,11 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const { page, isLoggedIn, email, password } = this.state;
+    const { page, isLoggedIn } = this.state;
 
     return (
       <Context.Provider value={{ login: this.login, logout: this.logout }}>
-          {isLoggedIn && <Header setPage={this.setPage} />}
+          {isLoggedIn && <Header setPage={this.setPage} routes={routes} />}
           {PAGES[page](this.setPage)}
       </Context.Provider>
     );
