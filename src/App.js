@@ -9,13 +9,13 @@ import Profile from './components/Profile/Profile.js';
 export const Context = React.createContext();
 
 const PAGES = {
-  profile: () => <Profile />,
-  map: () => <Map />,
+  profile: (setPage) => <Profile setPage={setPage} />,
+  map: (setPage) => <Map setPage={setPage} />,
   signup: (setPage) => <Signup setPage={setPage} />,
   login: (setPage) =><Login setPage={setPage} />,
 }
 
-const routes=[ 'map', 'profile', 'logout', 'signup' ];
+const routes=[ 'map', 'profile', 'logout' ];
 
 class App extends React.PureComponent {
   state = {
@@ -53,7 +53,7 @@ class App extends React.PureComponent {
     const { page, isLoggedIn } = this.state;
 
     return (
-      <Context.Provider value={{ login: this.login, logout: this.logout }}>
+      <Context.Provider value={{ login: this.login, logout: this.logout, isLoggedIn }}>
           {isLoggedIn && <Header setPage={this.setPage} routes={routes} />}
           {PAGES[page](this.setPage)}
       </Context.Provider>

@@ -8,8 +8,8 @@ import style from './signup.module.css'
 
 const useStyles = makeStyles({
     container: {
-        paddingTop: "285px",
-        paddingLeft: "585px",
+        paddingTop: "20vh",
+        maxWidth: "1200px",
     },
     textField: {
         marginBottom: "30px",
@@ -46,14 +46,14 @@ const Signup = (props) => {
                     <Typography variant="h2" className={classes.title}>Регистрация</Typography>
                     <Typography variant="subtitle2" className={classes.subtitle}>
                         Уже зарегестрированы?
-                        <Link>Войти</Link>
+                        <Link onClick={() => props.setPage('login')}>Войти</Link>
                     </Typography>
                     <form className={style.form} onSubmit={handleSubmit}>
                         <TextField className={classes.textField} type="email" name="email" required label={<span>Адрес электронной почты</span>} />
                         <TextField className={classes.textField} type="text" name="name" required label={<span>Имя</span>} />
                         <TextField className={classes.textField} type="text" name="surname" required label={<span>Фамилия</span>} />
                         <TextField className={classes.textField} type="password" name="password" required label={<span>Пароль</span>}  />
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" type="submit">
                             Sign up
                         </Button>
                     </form>

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import mapboxgl from 'mapbox-gl';
+import MapCard from './MapCard/MapCard.js'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibXlha2ltZW5rbyIsImEiOiJjazV2NGs5bDQwOHBhM25sYjdoejN5YmlhIn0.jrA7S2ccVQ6ZuC3tU9wCbQ';
 
@@ -36,16 +37,16 @@ class Map extends PureComponent {
     });
   }
 
-  render() {
-    const { lng, lat, zoom } = this.state;
+  setPage = () => {
+    this.props.setPage('profile');
+  }
 
+  render() {
     return (
-      <div>
-        <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
-        </div>
+      <>
         <div ref={this.mapRef} style={{ height: '100vh', width: '100vw' }}/>
-      </div>
+        <MapCard setPage={this.setPage} />
+      </>
     );
   }
 };

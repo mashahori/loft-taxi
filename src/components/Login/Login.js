@@ -1,4 +1,5 @@
 import React, { useContext }  from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField, Container, Typography, Link } from '@material-ui/core';
 import { Context } from '../../App';
@@ -7,8 +8,8 @@ import style from './Login.module.css'
 
 const useStyles = makeStyles({
     container: {
-        paddingTop: "285px",
-        paddingLeft: "585px",
+        paddingTop: '20vh',
+        maxWidth: '1200px'
     },
     textField: {
         marginBottom: "30px",
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
     }
   });
 
-const Login = () => {
+const Login = (props) => {
     const classes = useStyles();
     const context = useContext(Context);
 
@@ -34,12 +35,12 @@ const Login = () => {
     
     return (
         <div className={style.login}>
-            <Container maxWidth="md" className={classes.container}>
+            <Container className={classes.container}>
                 <div className={style.card}>
                     <Typography variant="h2" className={classes.title}>Войти</Typography>
                     <Typography variant="subtitle2" className={classes.subtitle}>
                         Новый пользователь?
-                        <Link>Зарегестрируйтесь</Link>
+                        <Link onClick={() => props.setPage('signup')}>Зарегестрируйтесь</Link>
                     </Typography>
                 <form className={style.form} onSubmit={handleSubmit}>
                     <TextField className={classes.textField} type="email" name="email" required label={<span>Имя пользователя</span>} />
@@ -54,5 +55,13 @@ const Login = () => {
     );
 
 }
+
+Login.propTypes = {
+    setPage: PropTypes.func,
+}
+
+Login.defaultProps = {
+    setPage: () => {},
+  };
 
 export default Login;
