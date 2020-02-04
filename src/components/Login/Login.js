@@ -1,26 +1,67 @@
-import React, { PureComponent } from 'react';
+import React, { useContext }  from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, TextField, Container, Typography, Link } from '@material-ui/core';
+import { Context } from '../../App';
 
+import style from './Login.module.css'
 
+const useStyles = makeStyles({
+    container: {
+        paddingTop: '20vh',
+        maxWidth: '1200px'
+    },
+    textField: {
+        marginBottom: "30px",
+    },
+    title: { 
+        fontSize: "36px",
+        marginBottom: "30px",
+    },
+    subtitle: {
+        marginBottom: "30px",
+        display: "flex",
+    }
+  });
 
-class  Login extends PureComponent {
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const login = e.target.login.value;
-        const password = e.target.password.value;
-        console.log(login, password);
-        this.props.setPage('map');
+const Login = (props) => {
+    const classes = useStyles();
+    const context = useContext(Context);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      context.login(e.target.email.value, e.target.password.value);
     }
     
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" name="login" />
-                <input type="password" name="password" />
-                <input type="submit" value="login" />
-            </form>
-        );
-    }
+    return (
+        <div className={style.login}>
+            <Container className={classes.container}>
+                <div className={style.card}>
+                    <Typography variant="h2" className={classes.title}>Войти</Typography>
+                    <Typography variant="subtitle2" className={classes.subtitle}>
+                        Новый пользователь?
+                        <Link onClick={() => props.setPage('signup')}>Зарегестрируйтесь</Link>
+                    </Typography>
+                <form className={style.form} onSubmit={handleSubmit}>
+                    <TextField className={classes.textField} type="email" name="email" required label={<span>Имя пользователя</span>} />
+                    <TextField className={classes.textField} type="password" name="password" required label={<span>Пароль</span>}  />
+                    <Button className={style.login__submit} variant="contained" color="primary" type="submit">
+                        Log in
+                    </Button>
+                </form>
+                </div>
+            </Container>
+        </div>
+    );
 
 }
+
+Login.propTypes = {
+    setPage: PropTypes.func,
+}
+
+Login.defaultProps = {
+    setPage: () => {},
+  };
 
 export default Login;
