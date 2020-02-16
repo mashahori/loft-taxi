@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, TextField, Container, Typography, Link } from '@material-ui/core';
+import { Button, TextField, Container, Typography } from '@material-ui/core';
 import { Context } from '../../App';
+import { Link, Redirect } from 'react-router-dom';
 
 import style from './signup.module.css'
 
@@ -40,13 +41,17 @@ const Signup = (props) => {
 
 
     return (
+        <>
+            {context.isLoggedIn ? (
+            <Redirect to="/map" />
+            ) : (
         <div className={style.signup}>
             <Container className={classes.container} maxWidth="md">
                 <div className={style.card}>
                     <Typography variant="h2" className={classes.title}>Регистрация</Typography>
                     <Typography variant="subtitle2" className={classes.subtitle}>
                         Уже зарегестрированы?
-                        <Link onClick={() => props.setPage('login')}>Войти</Link>
+                        <Link to="/login">Войти</Link>
                     </Typography>
                     <form className={style.form} onSubmit={handleSubmit}>
                         <TextField className={classes.textField} type="email" name="email" required label={<span>Адрес электронной почты</span>} />
@@ -60,6 +65,8 @@ const Signup = (props) => {
                 </div>
             </Container>
         </div>
+        )}
+    </>
     );
 
 };

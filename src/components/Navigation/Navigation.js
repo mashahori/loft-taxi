@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Context } from '../../App';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 const Navigation =(props) => {
   const context = useContext(Context);
@@ -16,9 +18,9 @@ const Navigation =(props) => {
   }
 
   return (
-    <button onClick={handleClick}>
+    <Button to="profile" component={Link} onClick={handleClick}>
       {text}
-    </button>
+    </Button>
     );
 };
 
