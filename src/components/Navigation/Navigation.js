@@ -1,24 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Context } from '../../App';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { logoutAction } from '../../modules/actions.js';
 
 const Navigation =(props) => {
-  const context = useContext(Context);
-
   const { text } = props;
-  
+
   const handleClick = () => {
     if (text === 'logout') {
-      context.logout();
-    } else {
-      props.setPage(text)
+      props.logout();
     }
+    return;
   }
 
   return (
-    <Button to="profile" component={Link} onClick={handleClick}>
+    <Button to={text} component={Link} onClick={handleClick}>
       {text}
     </Button>
     );
@@ -26,12 +24,22 @@ const Navigation =(props) => {
 
 Navigation.propTypes = {
   text: PropTypes.string,
-  setPage: PropTypes.func,
+  authed: PropTypes.bool,
+  logout: PropTypes.func,
 }
 
 Navigation.defaultProps = {
   text: '',
-  setPage: () => {},
+  authed: false,
+  logout: () => {}
 }
 
-export default Navigation;
+const mapStateToProps = state => ({
+  authed: state.authed
+});
+
+const mapDispathToProps = dispatch => ({
+  logout: () => dispatch(logoutAction())
+});
+
+export default connect(mapStateToProps, mapDispathToProps)(Navigation);

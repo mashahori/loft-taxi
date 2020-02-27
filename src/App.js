@@ -1,60 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './components/Header/Header.js';
 import Signup from './components/Signup/Signup.js';
 import Login from './components/Login/Login.js';
 import Map from './components/Map/Map.js';
 import Profile from './components/Profile/Profile.js';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import withAuth from './hocs/withAuth.js';
 import { PrivateRoute } from './routes/PrivateRoute.js';
-
-
-export const Context = React.createContext();
+import { connect } from 'react-redux';
 
 const routes=[ 'map', 'profile', 'logout' ];
 
-class App extends React.PureComponent {
-  state = {
-    isLoggedIn: false,
-    email: '',
-    password: ''
-  }
+const App  = (props) => (
+  <BrowserRouter>
+      {props.authed && <Header routes={routes} />}
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <PrivateRoute path="/profile" component={Profile} authed={props.authed} />
+        <Route path="map" component={Map} />
+        <PrivateRoute path="/" component={Map} authed={props.authed} />
+        <Route path="*" component={Login} />
+        <Redirect to="/" />
+      </Switch>
+  </BrowserRouter>
+);
 
-  login = (email, password) => {
-    this.setState({
-      isLoggedIn: true,
-      email: email,
-      password: password,
-    });
-  }
+App.propTypes = {
+  authed: PropTypes.bool,
+}
 
-  logout = () => {
-    this.setState({
-      email: '',
-      password: '',
-      isLoggedIn: false,
-    });
-  }
-
-  render() {
-    const { isLoggedIn } = this.state;
-
-    return (
-      <BrowserRouter>
-        <Context.Provider value={{ login: this.login, logout: this.logout, isLoggedIn }}>
-          {isLoggedIn && <Header setPage={this.setPage} routes={routes} />}
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <Route path="map" component={Map} />
-            <PrivateRoute path="/" component={Map} />
-            <Route path="*" component={Login} />
-          </Switch>
-        </Context.Provider>
-      </BrowserRouter>
-    );
-  }
+App.defaultProps = {
+  authed: false,
 };
 
-export default App;
+const mapStateToProps = state => ({
+    authed: state.authed,
+});
+
+export default connect(mapStateToProps)(App);

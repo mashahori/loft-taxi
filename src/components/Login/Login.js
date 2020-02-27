@@ -1,10 +1,10 @@
-import React, { useContext }  from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField, Container, Typography } from '@material-ui/core';
-import { Context } from '../../App';
 import { Link, Redirect } from 'react-router-dom';
-import withAuth from '../../hocs/withAuth.js';
+import { connect } from 'react-redux';
+import { loginAction } from '../../modules/actions.js';
 
 import style from './Login.module.css'
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     textField: {
         marginBottom: "30px",
     },
-    title: { 
+    title: {
         fontSize: "36px",
         marginBottom: "30px",
     },
@@ -28,16 +28,21 @@ const useStyles = makeStyles({
 
 const Login = (props) => {
     const classes = useStyles();
-    const context = useContext(Context);
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      context.login(e.target.email.value, e.target.password.value);
+      props.login({
+        email: e.target.email.value,
+        password: e.target.password.value,
+      });
+      localStorage.setItem('email', e.target.email.value);
+      localStorage.setItem('password', e.target.password.value);
+      localStorage.setItem('authed', true);
     }
-    
+
     return (
         <>
-            {context.isLoggedIn ? (
+            {props.authed ? (
             <Redirect to="/map" />
             ) : (
             <div className={style.login}>
@@ -64,11 +69,19 @@ const Login = (props) => {
 }
 
 Login.propTypes = {
-    setPage: PropTypes.func,
+  authed: PropTypes.bool,
 }
 
 Login.defaultProps = {
-    setPage: () => {},
-  };
+  authed: false,
+};
 
-export default Login;
+const mapStateToProps = state => ({
+    authed: state.authed
+});
+
+const mapDispathToProps = dispatch => ({
+  login: (user) => dispatch(loginAction(user))
+});
+
+export default connect(mapStateToProps, mapDispathToProps)(Login);

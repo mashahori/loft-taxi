@@ -6,7 +6,6 @@ import { shallow } from 'enzyme'
 
 describe('render a header', () => {
   const props = {
-    setPage: () => {},
     routes: ['a', 'b', 'c'],
   }
 
@@ -22,7 +21,6 @@ describe('render a header', () => {
 
   test('not render Navigation', () => {
     const props = {
-      setPage: () => {},
       routes: [],
     }
     const header = shallow(<Header {...props} />);
