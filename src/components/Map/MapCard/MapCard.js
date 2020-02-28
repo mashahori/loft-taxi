@@ -19,9 +19,6 @@ const useStyles = makeStyles({
     fontSize: "16px",
     marginBottom: "30px",
   },
-  button: {
-    display: 'block',
-  }
 });
 
 const MapCard = () => {

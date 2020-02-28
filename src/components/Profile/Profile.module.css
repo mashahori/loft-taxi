@@ -16,4 +16,6 @@
 .group {
   display: flex;
   margin-bottom: 60px;
+  width: 630px;
+  justify-content: space-between;
 }

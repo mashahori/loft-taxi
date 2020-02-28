@@ -1,10 +1,9 @@
 import React  from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginAction } from '../../modules/actions.js';
-import LoginCard from './LoginCard.js';
+import LoginCard from './LoginCard/LoginCard.js';
 
 const Login = (props) => {
     const handleSubmit = (email, password) => {

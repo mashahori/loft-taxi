@@ -29,6 +29,6 @@ describe('render a header', () => {
 
   test('render Navigation', () => {
     const header = shallow(<Header {...props} />);
-    expect(header.find('Navigation')).toHaveLength(1);
+    expect(header.find('Navigation')).toHaveLength(3);
   });
 })

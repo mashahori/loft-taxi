@@ -32,8 +32,12 @@ Navigation.defaultProps = {
   logout: () => {}
 }
 
+const mapStateToProps = state => ({
+  authed: state.authed
+});
+
 const mapDispathToProps = dispatch => ({
   logout: () => dispatch(logoutAction())
 });
 
-export default connect(mapDispathToProps)(Navigation);
+export default connect(mapStateToProps, mapDispathToProps)(Navigation);

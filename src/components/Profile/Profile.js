@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, TextField, Paper, Typography, Card } from '@material-ui/core';
-import style from './Profile.module.css'
+import { Button, Typography, Paper } from '@material-ui/core';
+import ProfileCard from './ProfileCard/ProfileCard.js';
+import style from './Profile.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -15,6 +16,7 @@ const useStyles = makeStyles({
       top: '100px',
       left: '50%',
       transform: 'translateX(-50%)',
+      textAlign: 'center',
   },
   textField: {
       marginBottom: '30px',
@@ -22,31 +24,30 @@ const useStyles = makeStyles({
   },
   title: {
       fontSize: "36px",
-      marginBottom: "30px",
   },
   subtitle: {
-      marginBottom: "30px",
-      display: "flex",
+      marginBottom: "40px",
   },
   card: {
-    maxWidth: '260px',
-    padding: '16px 32px'
+    maxWidth: '300px',
+    padding: '16px 32px',
+    boxSizing: 'border-box',
   }
 });
 
 const Profile = (props) => {
   const classes = useStyles();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (number, name, date, cvc) => {
     props.addCard({
-      number: e.target.card.value,
-      name: e.target.surname.value,
-      date: e.target.date.value,
-      cvc: e.target.cvc.value,
+      number: number,
+      name: name,
+      date: date,
+      cvc: cvc,
     });
+  };
 
-  }
+
   return (
       <div className={style.profile}>
       <Paper className={classes.wrapper}>
@@ -62,19 +63,7 @@ const Profile = (props) => {
             </Button>
           </>
         ) : (
-          <form className={style.form} onSubmit={handleSubmit}>
-            <div className={style.group}>
-              <Card className={classes.card}>
-                <TextField className={classes.textField} type="number" name="card" placeholder="0000000000000000" required label={<span>Номер карты</span>} />
-                <TextField className={classes.textField} type="text" name="date" placeholder="mm/yy" required label={<span>Срок действия</span>} />
-              </Card>
-              <Card className={classes.card}>
-                <TextField className={classes.textField} type="text" name="surname" placeholder="name surname" required label={<span>Имя владельца</span>} />
-                <TextField className={classes.textField} type="number" name="cvc" placeholder="cvc" required label={<span>CVC</span>} />
-              </Card>
-            </div>
-            <Button type="submit" variant="contained" color="primary" >Сохранить</Button>
-          </form>
+          <ProfileCard handleSubmit={handleSubmit} />
         )
       }
       </Paper>

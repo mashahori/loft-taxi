@@ -14,13 +14,14 @@ const useStyles = makeStyles({
       justifyContent: 'space-between',
       padding: '0 24px',
       zIndex: 10,
+      backgroundColor: '#ffffff',
   },
 });
 
 const Header = (props) => {
   const classes = useStyles();
   return (
-  <AppBar className={classes.bar} color="#ffffff" position="fixed">
+  <AppBar className={classes.bar} position="fixed">
     <Link to="/map">
       <Logo />
     </Link>

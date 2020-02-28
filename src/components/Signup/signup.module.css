@@ -13,8 +13,21 @@
   margin-left: auto;
 }
 
-
 .form {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+
+.group {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.link {
+  color: #1473e6;
+  text-decoration: none;
 }
