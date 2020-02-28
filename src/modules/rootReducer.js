@@ -1,6 +1,6 @@
 import { loginAction, failureAction, signupAction, logoutAction, addCardAction } from './actions.js'
 
-const INIT_STATE = {
+export const INIT_STATE = {
   authed: false,
   user: {
     email: '',
@@ -18,7 +18,7 @@ const INIT_STATE = {
   error: false,
 };
 
-const rootReducer = (state = INIT_STATE, action) => {
+export const rootReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case loginAction.toString():
       return { ...state,

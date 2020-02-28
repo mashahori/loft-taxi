@@ -18,7 +18,6 @@ const App  = (props) => (
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <PrivateRoute path="/profile" component={Profile} authed={props.authed} />
-        <Route path="map" component={Map} />
         <PrivateRoute path="/" component={Map} authed={props.authed} />
         <Route path="*" component={Login} />
         <Redirect to="/" />

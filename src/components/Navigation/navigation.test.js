@@ -8,7 +8,6 @@ import { shallow } from 'enzyme'
 describe('render a navigation', () => {
   const props = {
     text: 'a',
-    setPage: () => {},
   }
 
   test('render without crashing', () => {

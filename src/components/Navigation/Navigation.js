@@ -24,22 +24,16 @@ const Navigation =(props) => {
 
 Navigation.propTypes = {
   text: PropTypes.string,
-  authed: PropTypes.bool,
   logout: PropTypes.func,
 }
 
 Navigation.defaultProps = {
   text: '',
-  authed: false,
   logout: () => {}
 }
-
-const mapStateToProps = state => ({
-  authed: state.authed
-});
 
 const mapDispathToProps = dispatch => ({
   logout: () => dispatch(logoutAction())
 });
 
-export default connect(mapStateToProps, mapDispathToProps)(Navigation);
+export default connect(mapDispathToProps)(Navigation);

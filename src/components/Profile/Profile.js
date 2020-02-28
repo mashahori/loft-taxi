@@ -10,8 +10,11 @@ import { addCardAction } from '../../modules/actions.js';
 const useStyles = makeStyles({
   wrapper: {
       maxWidth: '630px',
-      margin: '0 auto',
-      padding: '44px 60px'
+      padding: '44px 60px',
+      position: 'absolute',
+      top: '100px',
+      left: '50%',
+      transform: 'translateX(-50%)',
   },
   textField: {
       marginBottom: '30px',

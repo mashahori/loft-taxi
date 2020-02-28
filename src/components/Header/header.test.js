@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '@testing-library/jest-dom/extend-expect'
-import Header from './Header.js'
+import { Header } from './Header.js'
 import { shallow } from 'enzyme'
 
 describe('render a header', () => {
@@ -29,6 +29,6 @@ describe('render a header', () => {
 
   test('render Navigation', () => {
     const header = shallow(<Header {...props} />);
-    expect(header.find('Navigation')).toHaveLength(3);
+    expect(header.find('Navigation')).toHaveLength(1);
   });
 })
