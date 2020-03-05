@@ -11,9 +11,6 @@ const Login = (props) => {
         email: email,
         password: password,
       });
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-      localStorage.setItem('authed', true);
     }
 
     return (

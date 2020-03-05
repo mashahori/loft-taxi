@@ -1,11 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import Signup from './Signup.js';
-import '@testing-library/jest-dom/extend-expect'
+import React  from 'react';
+import SignupCard from './SignupCard.js';
+import { shallow } from 'enzyme';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(<Signup />);
-    expect(Signup).toBeTruthy();
+describe('render SignupCard', () => {
+  test('render SignupCard', () => {
+    const wrapper = shallow(<SignupCard />);
+    expect(wrapper.find('.signup')).toHaveLength(1);;
   });
 });

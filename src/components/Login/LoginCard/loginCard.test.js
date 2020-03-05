@@ -1,11 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { LoginCard } from './LoginCard.js';
-import '@testing-library/jest-dom/extend-expect'
+import React  from 'react';
+import LoginCard from './LoginCard.js';
+import { shallow } from 'enzyme';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(() => <LoginCard />);
-    expect(<LoginCard />).toBeTruthy();
+describe('render LoginCardCard', () => {
+  test('render LoginCardCard', () => {
+    const wrapper = shallow(<LoginCard />);
+    expect(wrapper.find('.login')).toHaveLength(1);;
   });
 });

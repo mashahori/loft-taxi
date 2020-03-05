@@ -1,21 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Login } from './Login.js';
-import { LoginCard } from './LoginCard.js';
-import { Map } from '../Map/Map.js';
-import '@testing-library/jest-dom/extend-expect'
+import { Router } from 'react-router-dom';
+import Login from './Login.js';
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import createStore from '../../store';
+import { createMemoryHistory } from 'history';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(() => <Login />);
-    expect(<LoginCard />).toBeTruthy();
-  });
+const store = createStore();
+const history = createMemoryHistory();
 
-  test('render without crashing', () => {
-    const props = {
-      authed: true,
-    }
-    render(() => <Login {...props}/>);
-    expect(<Map />).toBeTruthy();
+describe('render Login', () => {
+  test('render Login', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <Login authed={false} />
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(Login)).toHaveLength(1);;
   });
 });

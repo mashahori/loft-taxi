@@ -1,10 +1,10 @@
 import { loginAction, failureAction, signupAction, logoutAction, addCardAction } from './actions.js'
 
 export const INIT_STATE = {
-  authed: false,
+  authed: localStorage.getItem('user') ? true : false,
   user: {
-    email: '',
-    password: '',
+    email: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).email : '',
+    password: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).info : '',
     name: '',
     surname: '',
   },

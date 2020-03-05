@@ -1,28 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Map } from './Map.js';
-import { MapCard } from './MapCard/MapCard.js';
-import '@testing-library/jest-dom/extend-expect'
+import { Router } from 'react-router-dom';
+import Map from './Map.js';
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import createStore from '../../store';
+import { createMemoryHistory } from 'history';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(() => <Map />);
-    expect(<Map />).toBeTruthy();
-  });
+const store = createStore();
+const history = createMemoryHistory();
 
-  test('card does not exist', () => {
-    const props = {
-      cardIsExist: false,
-    }
-    render(() => <Map {...props}/>);
-    expect(<MapCard />).toBeTruthy();
-  });
-
-  test('card exists', () => {
-    const props = {
-      cardIsExist: true,
-    }
-    render(() => <Map {...props}/>);
-    expect(MapCard).toBeUndefined();
+describe('render Map', () => {
+  test('render Map', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <Map />
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(Map)).toHaveLength(1);;
   });
 });

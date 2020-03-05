@@ -51,7 +51,7 @@ class Map extends PureComponent {
     const { cardIsExist } = this.props;
     return (
       <>
-        <div ref={this.mapRef} style={{ height: '100vh', width: '100vw' }}/>
+        <div ref={this.mapRef} style={{ height: '100vh', width: '100vw' }} data-testid="map" />
         {!cardIsExist && <MapCard />}
       </>
     );

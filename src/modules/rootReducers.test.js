@@ -1,5 +1,4 @@
 import { rootReducer, INIT_STATE } from './rootReducer.js';
-import '@testing-library/jest-dom/extend-expect'
 
 describe('reducers', () => {
   test('LOG_IN', () => {

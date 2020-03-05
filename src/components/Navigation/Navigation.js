@@ -10,15 +10,16 @@ const Navigation =(props) => {
 
   const handleClick = () => {
     if (text === 'logout') {
+      localStorage.clear();
       props.logout();
     }
     return;
   }
 
   return (
-    <Button to={text} component={Link} onClick={handleClick}>
-      {text}
-    </Button>
+      <Button to={text} component={Link} onClick={handleClick}>
+        {text}
+      </Button>
     );
 };
 

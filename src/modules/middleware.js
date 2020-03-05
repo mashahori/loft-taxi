@@ -27,6 +27,10 @@ export const authMiddleware = store => next => action => {
         email: action.payload.email,
         password: action.payload.password})})
       .then(response => response.json())
+      .then((response) => localStorage.setItem('user', JSON.stringify({
+        email: action.payload.email,
+        info: response.token,
+      })))
       .then(() => store.dispatch(action.payload))
       .catch(error => failureAction(error))
   }
@@ -45,8 +49,13 @@ export const registerMiddleware = store => next => action => {
         surname: action.payload.surname,
       })})
       .then(response => response.json())
+      .then((response) => localStorage.setItem('user', JSON.stringify({
+        email: action.payload.email,
+        info: response.token,
+      })))
       .then(() => store.dispatch(action.payload))
       .catch(error => failureAction(error))
   }
   return next(action);
 };
+

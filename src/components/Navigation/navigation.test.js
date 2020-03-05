@@ -1,27 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import '@testing-library/jest-dom/extend-expect'
-import Navigation from './Navigation.js'
-import { shallow } from 'enzyme'
+import { Router } from 'react-router-dom';
+import Navigation from './Navigation.js';
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import createStore from '../../store';
+import { createMemoryHistory } from 'history';
 
+const store = createStore();
+const history = createMemoryHistory();
 
-describe('render a navigation', () => {
-  const props = {
-    text: 'a',
-  }
-
-  test('render without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Navigation {...props} />, div);
-  });
-
-  test('render button', () => {
-    const nav = shallow(<Navigation {...props} />);
-    expect(nav.find('button')).toHaveLength(1);
-  });
-
-  test('text', () => {
-    const nav = shallow(<Navigation {...props} />);
-    expect(nav.find('button').first().text()).toEqual(props.text);
+describe('render Navigation', () => {
+  test('render Navigation', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <Navigation />
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(Navigation)).toHaveLength(1);;
   });
 });

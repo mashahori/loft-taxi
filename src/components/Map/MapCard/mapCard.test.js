@@ -1,11 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { MapCard } from './MapCard.js';
-import '@testing-library/jest-dom/extend-expect'
+import React  from 'react';
+import MapCard from './MapCard.js';
+import { shallow } from 'enzyme';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(() => <MapCard />);
-    expect(<MapCard />).toBeTruthy();
+describe('render MapCard', () => {
+  test('render MapCard', () => {
+    const wrapper = shallow(<MapCard />);
+    expect(wrapper.find('.card')).toHaveLength(1);
   });
 });

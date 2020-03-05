@@ -25,14 +25,20 @@ const Header = (props) => {
     <Link to="/map">
       <Logo />
     </Link>
-    <ul className={style.menu}>
-      {props.routes.map((item) => <Navigation key={item} text={item} />)}
-    </ul>
+    {props.routes.length && (
+      <ul className={style.menu}>
+        {props.routes.map((item) => <li key={item}><Navigation text={item} /></li>)}
+      </ul>
+    )}
   </AppBar>
 )};
 
 Header.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  routes: PropTypes.arrayOf(PropTypes.string),
+};
+
+Header.defaultProps = {
+  routes: [],
 };
 
 export default Header;

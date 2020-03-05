@@ -1,32 +1,22 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { PrivateRoute } from './PrivateRoute.js';
-import { Login } from '../components/Login/LOgin.js';
 import { BrowserRouter } from 'react-router-dom';
-import '@testing-library/jest-dom/extend-expect'
+import { shallow } from 'enzyme';
 
-const App = (props) => (
+const App = () => (
     <BrowserRouter>
-      <PrivateRoute component={props.component} authed={props.authed}/>
+      <PrivateRoute />
     </BrowserRouter>
 );
 
-describe('render a map', () => {
-  test('authed', () => {
-    const props = {
-      authed: true,
-      component: () => (<h1>Authed</h1>)
-    };
-    const { getByText } = render(<App {...props} />);
-    expect(getByText('Authed')).toBeInTheDocument();
+describe('render PrivateRoute', () => {
+  test('render PrivateRout', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(PrivateRoute)).toHaveLength(1);
   });
 
-  test('not authed', () => {
-    const props = {
-      authed: false,
-      component: () => (<h1>Authed</h1>)
-    };
-    render(() => <App {...props} />);
-    expect(<Login />).toBeTruthy();
+  test('have Child property', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(PrivateRoute)).toHaveProperty('children');
   });
 });

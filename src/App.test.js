@@ -1,82 +1,39 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import { render } from '@testing-library/react';
-import { App } from './App.js';
-import { Map } from './components/Map/Map.js';
-import { Profile } from './components/Profile/Profile.js';
-import { Header } from './components/Header/Header.js';
-import { Login } from './components/Profile/Profile.js';
+import App from './App.js';
 import { createMemoryHistory } from 'history';
-import '@testing-library/jest-dom/extend-expect';
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import createStore from './store';
+
+const store = createStore();
+const history = createMemoryHistory();
 
 describe('render routes', () => {
-  test('render Header', () => {
-    const history = createMemoryHistory();
-    const authed = true;
-    render(() =>
-      (<Router history={history}>
-        <App authed={authed} />
-      </Router>
-    ));
-    expect(<Header />).toBeTruthy();
+  test('render App', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(App)).toHaveLength(1);
   });
 
-  test('render Map by path', () => {
-    const history = createMemoryHistory();
-    history.push('/map');
-    const authed = true;
-    render(() => (
-      <Router history={history}>
-        <App authed={authed} />
-      </Router>
-    ));
-    expect(<Map />).toBeTruthy();
-  })
+  test('render children', () => {
+    const Child = () => <div>CHILD</div>;
 
-  test('render Profile by path', () => {
-    const history = createMemoryHistory();
-    history.push('/profile');
-    const authed = true;
-    render(() => (
-      <Router history={history}>
-        <App authed={authed} />
-      </Router>
-    ));
-    expect(<Profile />).toBeTruthy();
-  })
-
-  test('redirect from Map to Login if not authed', () => {
-    const history = createMemoryHistory();
-    history.push('/map');
-    const authed = false;
-    render(() => (
-      <Router history={history}>
-        <App authed={authed} />
-      </Router>
-    ));
-    expect(<Login />).toBeTruthy();
-  });
-
-  test('redirect from Profile to Login if not authed', () => {
-    const history = createMemoryHistory();
-    history.push('/profile');
-    const authed = false;
-    render(() => (
-      <Router history={history}>
-        <App authed={authed} />
-      </Router>
-    ));
-    expect(<Login />).toBeTruthy();
-  });
-
-  test('redirect to Login if no matches', () => {
-    const history = createMemoryHistory();
-    history.push('/some/bad/route');
-    render(() => (
-      <Router history={history}>
-        <App />
-      </Router>
-    ));
-    expect(<Login />).toBeTruthy();
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <App>
+            <Child />
+          </App>
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(App )).toHaveProperty('children');
+    expect(wrapper.find(Child)).toHaveLength(1);
   });
 });

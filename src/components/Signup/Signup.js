@@ -6,19 +6,14 @@ import { signupAction } from '../../modules/actions.js';
 import SignupCard from './SignupCard/SignupCard.js';
 
 const Signup = (props) => {
-    const handleSubmit = (email, password, name, surname) => {
-        props.signup({
-            email: email,
-            password: password,
-            name: name,
-            surname: surname,
-          });
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
-        localStorage.setItem('name', name);
-        localStorage.setItem('surname', surname);
-        localStorage.setItem('authed', true);
-    }
+  const handleSubmit = (email, password, name, surname) => {
+    props.signup({
+        email: email,
+        password: password,
+        name: name,
+        surname: surname,
+      });
+  }
 
 
     return (

@@ -1,11 +1,10 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { ProfileCard } from './ProfileCard.js';
-import '@testing-library/jest-dom/extend-expect'
+import React  from 'react';
+import ProfileCard from './ProfileCard.js';
+import { shallow } from 'enzyme';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(() => <ProfileCard />);
-    expect(<ProfileCard />).toBeTruthy();
+describe('render ProfileCard', () => {
+  test('render ProfileCard', () => {
+    const wrapper = shallow(<ProfileCard />);
+    expect(wrapper.find('.form')).toHaveLength(1);;
   });
 });
