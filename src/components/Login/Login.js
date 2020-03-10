@@ -1,67 +1,45 @@
-import React, { useContext }  from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, TextField, Container, Typography, Link } from '@material-ui/core';
-import { Context } from '../../App';
-
-import style from './Login.module.css'
-
-const useStyles = makeStyles({
-    container: {
-        paddingTop: '20vh',
-        maxWidth: '1200px'
-    },
-    textField: {
-        marginBottom: "30px",
-    },
-    title: { 
-        fontSize: "36px",
-        marginBottom: "30px",
-    },
-    subtitle: {
-        marginBottom: "30px",
-        display: "flex",
-    }
-  });
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginAction } from '../../modules/actions.js';
+import LoginCard from './LoginCard/LoginCard.js';
 
 const Login = (props) => {
-    const classes = useStyles();
-    const context = useContext(Context);
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      context.login(e.target.email.value, e.target.password.value);
+    const handleSubmit = (email, password) => {
+      props.login({
+        email: email,
+        password: password,
+      });
     }
-    
-    return (
-        <div className={style.login}>
-            <Container className={classes.container}>
-                <div className={style.card}>
-                    <Typography variant="h2" className={classes.title}>Войти</Typography>
-                    <Typography variant="subtitle2" className={classes.subtitle}>
-                        Новый пользователь?
-                        <Link onClick={() => props.setPage('signup')}>Зарегестрируйтесь</Link>
-                    </Typography>
-                <form className={style.form} onSubmit={handleSubmit}>
-                    <TextField className={classes.textField} type="email" name="email" required label={<span>Имя пользователя</span>} />
-                    <TextField className={classes.textField} type="password" name="password" required label={<span>Пароль</span>}  />
-                    <Button className={style.login__submit} variant="contained" color="primary" type="submit">
-                        Log in
-                    </Button>
-                </form>
-                </div>
-            </Container>
-        </div>
-    );
 
+    return (
+        <>
+          {props.authed ? (
+            <Redirect to="/map" />
+          ) : (
+            <LoginCard handleSubmit={handleSubmit} />
+          )}
+        </>
+    );
 }
 
 Login.propTypes = {
-    setPage: PropTypes.func,
+  authed: PropTypes.bool,
+  login: PropTypes.func,
 }
 
 Login.defaultProps = {
-    setPage: () => {},
-  };
+  authed: false,
+  login: () => {},
+};
 
-export default Login;
+const mapStateToProps = state => ({
+  authed: state.authed,
+});
+
+const mapDispathToProps = dispatch => ({
+  login: (user) => dispatch(loginAction(user)),
+});
+
+export default connect(mapStateToProps, mapDispathToProps)(Login);

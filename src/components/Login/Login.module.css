@@ -16,4 +16,10 @@
 .form {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+
+.link {
+  color: #1473e6;
+  text-decoration: none;
 }

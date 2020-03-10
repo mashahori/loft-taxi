@@ -1,11 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { Router } from 'react-router-dom';
 import Signup from './Signup.js';
-import '@testing-library/jest-dom/extend-expect'
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import createStore from '../../store';
+import { createMemoryHistory } from 'history';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(<Signup />);
-    expect(Signup).toBeTruthy();
+const store = createStore();
+const history = createMemoryHistory();
+
+describe('render Signup', () => {
+  test('render Signup', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <Signup authed={false} />
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(Signup)).toHaveLength(1);;
   });
 });

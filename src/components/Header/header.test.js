@@ -1,36 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import '@testing-library/jest-dom/extend-expect'
-import Header from './Header.js'
-import { shallow } from 'enzyme'
+import '@testing-library/jest-dom/extend-expect';
+import Header from './Header.js';
+import { shallow } from 'enzyme';
 
 describe('render a header', () => {
-  const props = {
-    setPage: () => {},
-    routes: ['a', 'b', 'c'],
-  }
+  const routes = ['a', 'b', 'c'];
 
-  test('render without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Header {...props} />, div);
+  test('render <ul/>', () => {
+    const header = shallow(<Header routes={routes} />);
+    expect(header.find('ul')).toHaveLength(1);
   });
 
-  test('render layout', () => {
-    const header = shallow(<Header {...props} />);
-    expect(header.find('ul')).toHaveLength(1)
+  test('not render <ul/>', () => {
+    const routes = [];
+
+    const header = shallow(<Header routes={routes} />);
+    expect(header.find('ul')).toHaveLength(0);
   });
 
-  test('not render Navigation', () => {
-    const props = {
-      setPage: () => {},
-      routes: [],
-    }
-    const header = shallow(<Header {...props} />);
-    expect(header.find('Navigation')).toHaveLength(0);
+  test('render <li/> 3 times', () => {
+    const header = shallow(<Header routes={routes} />);
+    expect(header.find('li')).toHaveLength(3);
   });
-
-  test('render Navigation', () => {
-    const header = shallow(<Header {...props} />);
-    expect(header.find('Navigation')).toHaveLength(3);
-  });
-})
+});

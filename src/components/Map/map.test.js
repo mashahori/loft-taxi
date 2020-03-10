@@ -1,11 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { Router } from 'react-router-dom';
 import Map from './Map.js';
-import '@testing-library/jest-dom/extend-expect'
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import createStore from '../../store';
+import { createMemoryHistory } from 'history';
 
-describe('render a map', () => {
-  test('render without crashing', () => {
-    render(<Map />);
-    expect(Map).toBeTruthy();
+const store = createStore();
+const history = createMemoryHistory();
+
+describe('render Map', () => {
+  test('render Map', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Router history={history}>
+          <Map />
+        </Router>
+      </Provider>
+    );
+    expect(wrapper.find(Map)).toHaveLength(1);;
   });
 });

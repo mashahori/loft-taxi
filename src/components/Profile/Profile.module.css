@@ -1,9 +1,8 @@
 .profile {
   background-color: #323232;
   background-image: url('../../assets/images/login_background.png');
-  min-height: 100vh;
-  width: 100%;
-  padding-top: 44px;
+  height: 100vh;
+  width: 100vw;
 }
 
 .card {
@@ -17,4 +16,6 @@
 .group {
   display: flex;
   margin-bottom: 60px;
+  width: 630px;
+  justify-content: space-between;
 }

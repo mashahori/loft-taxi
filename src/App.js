@@ -1,64 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from './components/Header/Header.js';
 import Signup from './components/Signup/Signup.js';
 import Login from './components/Login/Login.js';
 import Map from './components/Map/Map.js';
 import Profile from './components/Profile/Profile.js';
-
-
-export const Context = React.createContext();
-
-const PAGES = {
-  profile: (setPage) => <Profile setPage={setPage} />,
-  map: (setPage) => <Map setPage={setPage} />,
-  signup: (setPage) => <Signup setPage={setPage} />,
-  login: (setPage) =><Login setPage={setPage} />,
-}
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { PrivateRoute } from './routes/PrivateRoute.js';
+import { connect } from 'react-redux';
 
 const routes=[ 'map', 'profile', 'logout' ];
 
-class App extends React.PureComponent {
-  state = {
-    page: 'login',
-    isLoggedIn: false,
-    email: '',
-    password: ''
-  }
+const App  = (props) => (
+  <BrowserRouter>
+      {props.authed && <Header routes={routes} />}
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <PrivateRoute path="/profile" component={Profile} authed={props.authed} />
+        <PrivateRoute path="/" component={Map} authed={props.authed} />
+        <Route path="*" component={Login} />
+        <Redirect to="/" />
+      </Switch>
+  </BrowserRouter>
+);
 
-  setPage = (page) => {
-    this.setState({
-      page: page,
-    });
-  }
+App.propTypes = {
+  authed: PropTypes.bool,
+}
 
-  login = (email, password) => {
-    this.setState({
-      page: 'map',
-      isLoggedIn: true,
-      email: email,
-      password: password,
-    });
-  }
-
-  logout = () => {
-    this.setState({
-      email: '',
-      password: '',
-      isLoggedIn: false,
-      page: 'login'
-    });
-  }
-
-  render() {
-    const { page, isLoggedIn } = this.state;
-
-    return (
-      <Context.Provider value={{ login: this.login, logout: this.logout, isLoggedIn }}>
-          {isLoggedIn && <Header setPage={this.setPage} routes={routes} />}
-          {PAGES[page](this.setPage)}
-      </Context.Provider>
-    );
-  }
+App.defaultProps = {
+  authed: false,
 };
 
-export default App;
+const mapStateToProps = state => ({
+    authed: state.authed,
+});
+
+export default connect(mapStateToProps)(App);
