@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/loft-taxi/static/css/main.344d9a48.chunk.css",
+    "main.js": "/loft-taxi/static/js/main.e87c9af7.chunk.js",
+    "main.js.map": "/loft-taxi/static/js/main.e87c9af7.chunk.js.map",
+    "runtime-main.js": "/loft-taxi/static/js/runtime-main.f16ff31a.js",
+    "runtime-main.js.map": "/loft-taxi/static/js/runtime-main.f16ff31a.js.map",
+    "static/js/2.a4b8ee0b.chunk.js": "/loft-taxi/static/js/2.a4b8ee0b.chunk.js",
+    "static/js/2.a4b8ee0b.chunk.js.map": "/loft-taxi/static/js/2.a4b8ee0b.chunk.js.map",
+    "index.html": "/loft-taxi/index.html",
+    "precache-manifest.287c5b6c12a0fe69854ccb094909ba5f.js": "/loft-taxi/precache-manifest.287c5b6c12a0fe69854ccb094909ba5f.js",
+    "service-worker.js": "/loft-taxi/service-worker.js",
+    "static/css/main.344d9a48.chunk.css.map": "/loft-taxi/static/css/main.344d9a48.chunk.css.map",
+    "static/js/2.a4b8ee0b.chunk.js.LICENSE": "/loft-taxi/static/js/2.a4b8ee0b.chunk.js.LICENSE",
+    "static/media/Profile.module.css": "/loft-taxi/static/media/login_background.c0bb546c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f16ff31a.js",
+    "static/js/2.a4b8ee0b.chunk.js",
+    "static/css/main.344d9a48.chunk.css",
+    "static/js/main.e87c9af7.chunk.js"
+  ]
+}
