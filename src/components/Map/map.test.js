@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import Map from './Map.js';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
-import createStore from '../../store';
 import { createMemoryHistory } from 'history';
+import createStore from '../../store';
+import Map from './Map.js';
 
 const store = createStore();
 const history = createMemoryHistory();
@@ -16,8 +16,8 @@ describe('render Map', () => {
         <Router history={history}>
           <Map />
         </Router>
-      </Provider>
+      </Provider>,
     );
-    expect(wrapper.find(Map)).toHaveLength(1);;
+    expect(wrapper.find(Map)).toHaveLength(1);
   });
 });

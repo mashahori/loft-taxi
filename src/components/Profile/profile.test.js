@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import Profile from './Profile.js';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
-import createStore from '../../store';
 import { createMemoryHistory } from 'history';
+import createStore from '../../store';
+import Profile from './Profile.js';
 
 const store = createStore();
 const history = createMemoryHistory();
@@ -16,8 +16,8 @@ describe('render Profile', () => {
         <Router history={history}>
           <Profile />
         </Router>
-      </Provider>
+      </Provider>,
     );
-    expect(wrapper.find(Profile)).toHaveLength(1);;
+    expect(wrapper.find(Profile)).toHaveLength(1);
   });
 });

@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { logoutAction } from '../../modules/actions.js';
 
-const Navigation =(props) => {
+const Navigation = (props) => {
   const { text } = props;
 
   const handleClick = () => {
@@ -13,32 +13,31 @@ const Navigation =(props) => {
       localStorage.clear();
       props.logout();
     }
-    return;
-  }
+  };
 
   return (
-      <Button to={text} component={Link} onClick={handleClick}>
-        {text}
-      </Button>
-    );
+    <Button to={text} component={Link} onClick={handleClick}>
+      {text}
+    </Button>
+  );
 };
 
 Navigation.propTypes = {
   text: PropTypes.string,
   logout: PropTypes.func,
-}
+};
 
 Navigation.defaultProps = {
   text: '',
-  logout: () => {}
-}
+  logout: () => {},
+};
 
-const mapStateToProps = state => ({
-  authed: state.authed
+const mapStateToProps = (state) => ({
+  authed: state.authed,
 });
 
-const mapDispathToProps = dispatch => ({
-  logout: () => dispatch(logoutAction())
+const mapDispathToProps = (dispatch) => ({
+  logout: () => dispatch(logoutAction()),
 });
 
 export default connect(mapStateToProps, mapDispathToProps)(Navigation);

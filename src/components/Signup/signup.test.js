@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import Signup from './Signup.js';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
-import createStore from '../../store';
 import { createMemoryHistory } from 'history';
+import createStore from '../../store';
+import Signup from './Signup.js';
 
 const store = createStore();
 const history = createMemoryHistory();
@@ -16,8 +16,8 @@ describe('render Signup', () => {
         <Router history={history}>
           <Signup authed={false} />
         </Router>
-      </Provider>
+      </Provider>,
     );
-    expect(wrapper.find(Signup)).toHaveLength(1);;
+    expect(wrapper.find(Signup)).toHaveLength(1);
   });
 });

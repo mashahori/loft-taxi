@@ -3,16 +3,16 @@ import { Button, Card, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-import style from '../map.module.css'
+import style from '../map.module.css';
 
 const useStyles = makeStyles({
-  title: { 
-      fontSize: "36px",
-      marginBottom: "30px",
+  title: {
+    fontSize: '36px',
+    marginBottom: '30px',
   },
-  text: { 
-    fontSize: "16px",
-    marginBottom: "30px",
+  text: {
+    fontSize: '16px',
+    marginBottom: '30px',
   },
 });
 

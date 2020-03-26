@@ -8,23 +8,23 @@ import SignupCard from './SignupCard/SignupCard.js';
 const Signup = (props) => {
   const handleSubmit = (email, password, name, surname) => {
     props.signup({
-        email: email,
-        password: password,
-        name: name,
-        surname: surname,
-      });
-  }
+      email,
+      password,
+      name,
+      surname,
+    });
+  };
 
 
-    return (
-        <>
-          {props.authed ? (
-            <Redirect to="/map" />
-            ) : (
-            <SignupCard handleSubmit={handleSubmit} />
-          )}
-        </>
-    );
+  return (
+    <>
+      {props.authed ? (
+        <Redirect to="/map" />
+      ) : (
+        <SignupCard handleSubmit={handleSubmit} />
+      )}
+    </>
+  );
 };
 
 Signup.propTypes = {
@@ -33,16 +33,16 @@ Signup.propTypes = {
 };
 
 Signup.defaultProps = {
-    authed: false,
-    signup: () => {}
+  authed: false,
+  signup: () => {},
 };
 
-const mapStateToProps = state => ({
-    authed: state.authed
+const mapStateToProps = (state) => ({
+  authed: state.authed,
 });
 
-const mapDispathToProps = dispatch => ({
-  signup: (user) => dispatch(signupAction(user))
+const mapDispathToProps = (dispatch) => ({
+  signup: (user) => dispatch(signupAction(user)),
 });
 
 export default connect(mapStateToProps, mapDispathToProps)(Signup);

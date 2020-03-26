@@ -1,9 +1,9 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import App from './App.js';
 import { createMemoryHistory } from 'history';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
+import App from './App.js';
 import createStore from './store';
 
 const store = createStore();
@@ -16,7 +16,7 @@ describe('render routes', () => {
         <Router history={history}>
           <App />
         </Router>
-      </Provider>
+      </Provider>,
     );
     expect(wrapper.find(App)).toHaveLength(1);
   });
@@ -31,9 +31,9 @@ describe('render routes', () => {
             <Child />
           </App>
         </Router>
-      </Provider>
+      </Provider>,
     );
-    expect(wrapper.find(App )).toHaveProperty('children');
+    expect(wrapper.find(App)).toHaveProperty('children');
     expect(wrapper.find(Child)).toHaveLength(1);
   });
 });
