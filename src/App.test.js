@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
-import App from './App.js';
+import App from './App';
 import createStore from './store';
 
 const store = createStore();

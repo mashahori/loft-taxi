@@ -12,8 +12,8 @@ class Map extends PureComponent {
     this.state = {
       lng: 30.3,
       lat: 59.9,
-      zoom: 12
-    };
+      zoom: 12,
+    }
 
     this.mapRef = React.createRef()
   }

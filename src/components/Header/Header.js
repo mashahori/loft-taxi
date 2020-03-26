@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { Logo } from 'loft-taxi-mui-theme';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Navigation from '../Navigation/Navigation.js';
+import Navigation from '../Navigation/Navigation';
 import style from './Header.module.css';
 
 const useStyles = makeStyles({
@@ -18,17 +18,17 @@ const useStyles = makeStyles({
   },
 });
 
-const Header = (props) => {
+const Header = ({ routes }) => {
   const classes = useStyles();
   return (
     <AppBar className={classes.bar} position="fixed">
       <Link to="/map">
         <Logo />
       </Link>
-      {props.routes.length && (
-      <ul className={style.menu}>
-        {props.routes.map((item) => <li key={item}><Navigation text={item} /></li>)}
-      </ul>
+      {routes.length && (
+        <ul className={style.menu}>
+          {routes.map((item) => <li key={item}><Navigation text={item} /></li>)}
+        </ul>
       )}
     </AppBar>
   );

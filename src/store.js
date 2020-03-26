@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import rootReducer from './modules/rootReducer.js';
-import { cardMiddleware, authMiddleware, registerMiddleware } from './modules/middleware.js';
+import { rootReducer } from './modules/rootReducer';
+import { cardMiddleware, authMiddleware, registerMiddleware } from './modules/middleware';
 
 const createAppStore = () => {
   const store = createStore(

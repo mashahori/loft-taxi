@@ -22,7 +22,9 @@ const MapCard = () => {
   return (
     <Card className={style.card}>
       <Typography variant="h2" className={classes.title}>Заполните платежные данные</Typography>
-      <Typography variant="subtitle1" className={classes.text}>Укажите информацию о банковской карте, чтобы сделать заказ.</Typography>
+      <Typography variant="subtitle1" className={classes.text}>
+        Укажите информацию о банковской карте, чтобы сделать заказ.
+      </Typography>
       <Button className={classes.button} to="profile" component={Link} variant="contained" color="primary">
         Перейти в профиль
       </Button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { shallow } from 'enzyme';
-import { PrivateRoute } from './PrivateRoute.js';
+import { PrivateRoute } from './PrivateRoute';
 
 const App = () => (
   <BrowserRouter>
