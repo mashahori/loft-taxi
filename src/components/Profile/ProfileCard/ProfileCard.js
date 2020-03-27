@@ -1,34 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, TextField, Card } from '@material-ui/core';
-import style from '../Profile.module.css'
 import { makeStyles } from '@material-ui/core/styles';
+import style from '../Profile.module.css';
 
 const useStyles = makeStyles({
   wrapper: {
-      maxWidth: '630px',
-      padding: '44px 60px',
-      position: 'absolute',
-      top: '100px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      textAlign: 'center',
+    maxWidth: '630px',
+    padding: '44px 60px',
+    position: 'absolute',
+    top: '100px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textAlign: 'center',
   },
   textField: {
-      marginBottom: '30px',
-      width: '100%'
+    marginBottom: '30px',
+    width: '100%',
   },
   title: {
-      fontSize: "36px",
+    fontSize: '36px',
   },
   subtitle: {
-      marginBottom: "40px",
+    marginBottom: '40px',
   },
   card: {
     maxWidth: '300px',
     padding: '16px 32px',
     boxSizing: 'border-box',
-  }
+  },
 });
 
 const ProfileCard = (props) => {
@@ -48,33 +48,39 @@ const ProfileCard = (props) => {
     <form className={style.form} onSubmit={handleSubmit}>
       <div className={style.group}>
         <Card className={classes.card}>
-          <TextField 
+          <TextField
             className={classes.textField}
             type="number"
             name="card"
             placeholder="0000000000000000"
-            required label={<span>Номер карты</span>} 
+            required
+            label={<span>Номер карты</span>}
           />
           <TextField
             className={classes.textField}
             type="text"
             name="date"
             placeholder="mm/yy"
-            required label={<span>Срок действия</span>} />
+            required
+            label={<span>Срок действия</span>}
+          />
         </Card>
         <Card className={classes.card}>
           <TextField
-           className={classes.textField}
-           type="text" name="surname"
-           placeholder="name surname"
-           required label={<span>Имя владельца</span>}
+            className={classes.textField}
+            type="text"
+            name="surname"
+            placeholder="name surname"
+            required
+            label={<span>Имя владельца</span>}
           />
           <TextField
-           className={classes.textField}
-           type="number"
-           name="cvc"
-           placeholder="cvc"
-           required label={<span>CVC</span>} 
+            className={classes.textField}
+            type="number"
+            name="cvc"
+            placeholder="cvc"
+            required
+            label={<span>CVC</span>}
           />
         </Card>
       </div>

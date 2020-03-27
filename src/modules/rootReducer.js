@@ -1,14 +1,14 @@
-import { loginAction, failureAction, signupAction, logoutAction, addCardAction } from './actions.js'
+import { loginAction, failureAction, signupAction, logoutAction, addCardAction } from './actions.js';
 
 export const INIT_STATE = {
-  authed: localStorage.getItem('user') ? true : false,
+  authed: !!localStorage.getItem('user'),
   user: {
     email: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).email : '',
     password: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).info : '',
     name: '',
     surname: '',
   },
-  card : {
+  card: {
     number: '',
     name: '',
     date: '',
@@ -26,7 +26,7 @@ export const rootReducer = (state = INIT_STATE, action) => {
         user: {
           email: action.payload.email,
           password: action.payload.password,
-        }
+        },
       };
     case signupAction.toString():
       return { ...state,
@@ -36,7 +36,7 @@ export const rootReducer = (state = INIT_STATE, action) => {
           password: action.payload.password,
           name: action.payload.name,
           surname: action.payload.surname,
-        }
+        },
       };
     case logoutAction.toString():
       return { ...state,
@@ -48,19 +48,19 @@ export const rootReducer = (state = INIT_STATE, action) => {
       };
     case addCardAction.toString():
       return { ...state,
-          card : {
-            number: action.payload.number,
-            name: action.payload.name,
-            date:  action.payload.date,
-            cvc:  action.payload.cvc,
-          },
-          cardIsExist: true,
+        card: {
+          number: action.payload.number,
+          name: action.payload.name,
+          date: action.payload.date,
+          cvc: action.payload.cvc,
+        },
+        cardIsExist: true,
       };
     case failureAction.toString():
       return { ...state,
         error: true,
         errorMessage: action.payload,
-      }
+      };
     default:
       return state;
   }

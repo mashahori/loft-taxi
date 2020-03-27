@@ -1,6 +1,6 @@
-import React  from 'react';
-import MapCard from './MapCard.js';
+import React from 'react';
 import { shallow } from 'enzyme';
+import MapCard from './MapCard.js';
 
 describe('render MapCard', () => {
   test('render MapCard', () => {

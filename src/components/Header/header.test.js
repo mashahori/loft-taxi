@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import Header from './Header.js';
 import { shallow } from 'enzyme';
+import Header from './Header.js';
 
 describe('render a header', () => {
   const routes = ['a', 'b', 'c'];

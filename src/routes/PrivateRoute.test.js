@@ -1,12 +1,12 @@
 import React from 'react';
-import { PrivateRoute } from './PrivateRoute.js';
 import { BrowserRouter } from 'react-router-dom';
 import { shallow } from 'enzyme';
+import { PrivateRoute } from './PrivateRoute';
 
 const App = () => (
-    <BrowserRouter>
-      <PrivateRoute />
-    </BrowserRouter>
+  <BrowserRouter>
+    <PrivateRoute />
+  </BrowserRouter>
 );
 
 describe('render PrivateRoute', () => {
